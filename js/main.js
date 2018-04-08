@@ -39,6 +39,7 @@ window.addEventListener('load', function() {
                 var msg = responseMessage;
             }
             console.log(msg);
+
             for (let i = 0; i <= msg.forecast.forecastday.length; i++) {
                 przycisk.parent().children('.wynik').append('Data: ' + '<strong>' + msg.forecast.forecastday[i].date + '</strong>' + ' Temperatura: ' + msg.forecast.forecastday[i].day.maxtemp_c + ' C, ' + 'Siła wiatru: ' + msg.forecast.forecastday[i].day.maxwind_kph +
                     ' km/h ' + '</br>');
@@ -54,11 +55,12 @@ window.addEventListener('load', function() {
     $('#pogoda .pogodaHistoria').click(function() {
         var przycisk = $(this);
         var miasto = przycisk.parent().children('input[type="text"]').val();
+        var data = przycisk.parent().children('input[type="date"]').val();
         przycisk.parent().children('h2').children('span').text(miasto);
         console.log(miasto);
         $.ajax({
             method: 'GET',
-            url: 'http://api.apixu.com/v1/history.json?key=5fdfe9283556479eb5a94607180304&q=' + miasto + '&dt=2018-04-01',
+            url: 'http://api.apixu.com/v1/history.json?key=5fdfe9283556479eb5a94607180304&q=' + miasto + '&dt=' + data,
         }).done(function(responseMessage) {
             if ("string" === typeof responseMessage) {
                 var msg = JSON.parse(responseMessage);
@@ -67,11 +69,11 @@ window.addEventListener('load', function() {
             }
             console.log(msg);
             for (let i = 0; i <= msg.forecast.forecastday.length; i++) {
-                przycisk.parent().children('.wynik').append('Data: ' + '<strong>' + msg.forecast.forecastday[i].date + '</strong>' + ' Temperatura: ' + msg.forecast.forecastday[i].day.maxtemp_c + ' C, ' + 'Siła wiatru: ' + msg.forecast.forecastday[i].day.maxwind_kph +
+                przycisk.parent().children('.wynik').html('Data: ' + '<strong>' + msg.forecast.forecastday[i].date + '</strong>' + ' Temperatura: ' + msg.forecast.forecastday[i].day.maxtemp_c + ' C, ' + 'Siła wiatru: ' + msg.forecast.forecastday[i].day.maxwind_kph +
                     ' km/h ' + '</br>');
             }
         }).fail(function(msg) {
-            alert("Proszę podać nazwę miasta!");
+            alert("Proszę podać nazwę miasta oraz maxymalnie 7 dni wstecz od dnia dzisiejszego!");
             console.log(msg)
         }).always(function(msg) {
 
