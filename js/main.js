@@ -15,12 +15,10 @@ window.addEventListener('load', function() {
                 var msg = responseMessage;
             }
             console.log(msg);
-            przycisk.parent().children('.wynik').html('Temperatura: ' + msg.current.temp_c + ' C, ' + 'Siła wiatru: ' + msg.current.wind_kph + ' km/h ' + '</br>');
+            przycisk.parent().children('.wynik').html('Temperatura: ' + msg.current.temp_c + ' C, ' + 'Siła wiatru: ' + msg.current.wind_kph + ' km/h ' + ', Zachmurzenie: ' + msg.current.condition.text + '</br>');
         }).fail(function(msg) {
             alert("Proszę podać nazwę miasta!");
             console.log(msg)
-        }).always(function(msg) {
-
         });
     });
 
@@ -42,13 +40,11 @@ window.addEventListener('load', function() {
 
             for (let i = 0; i <= msg.forecast.forecastday.length; i++) {
                 przycisk.parent().children('.wynik').append('Data: ' + '<strong>' + msg.forecast.forecastday[i].date + '</strong>' + ' Temperatura: ' + msg.forecast.forecastday[i].day.maxtemp_c + ' C, ' + 'Siła wiatru: ' + msg.forecast.forecastday[i].day.maxwind_kph +
-                    ' km/h ' + '</br>');
+                    ' km/h ' + ', Zachmurzenie: ' + msg.forecast.forecastday[i].day.condition.text + '</br>');
             }
         }).fail(function(msg) {
             alert("Proszę podać nazwę miasta!");
             console.log(msg)
-        }).always(function(msg) {
-
         });
     });
 
@@ -70,16 +66,11 @@ window.addEventListener('load', function() {
             console.log(msg);
             for (let i = 0; i <= msg.forecast.forecastday.length; i++) {
                 przycisk.parent().children('.wynik').html('Data: ' + '<strong>' + msg.forecast.forecastday[i].date + '</strong>' + ' Temperatura: ' + msg.forecast.forecastday[i].day.maxtemp_c + ' C, ' + 'Siła wiatru: ' + msg.forecast.forecastday[i].day.maxwind_kph +
-                    ' km/h ' + '</br>');
+                    ' km/h ' + ', Zachmurzenie: ' + msg.forecast.forecastday[0].day.condition.text + '</br>');
             }
         }).fail(function(msg) {
             alert("Proszę podać nazwę miasta oraz maxymalnie 7 dni wstecz od dnia dzisiejszego!");
             console.log(msg)
-        }).always(function(msg) {
-
         });
-
     });
-
-
 });
