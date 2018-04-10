@@ -38,7 +38,7 @@ window.addEventListener('load', function() {
             }
             console.log(msg);
 
-            for (let i = 0; i <= msg.forecast.forecastday.length; i++) {
+            for (let i = 0; i < msg.forecast.forecastday.length; i++) {
                 przycisk.parent().children('.wynik').append('Data: ' + '<strong>' + msg.forecast.forecastday[i].date + '</strong>' + ' Temperatura: ' + msg.forecast.forecastday[i].day.maxtemp_c + ' C, ' + 'Siła wiatru: ' + msg.forecast.forecastday[i].day.maxwind_kph +
                     ' km/h ' + ', Zachmurzenie: ' + msg.forecast.forecastday[i].day.condition.text + '</br>');
             }
@@ -64,7 +64,7 @@ window.addEventListener('load', function() {
                 var msg = responseMessage;
             }
             console.log(msg);
-            for (let i = 0; i <= msg.forecast.forecastday.length; i++) {
+            for (let i = 0; i < msg.forecast.forecastday.length; i++) {
                 przycisk.parent().children('.wynik').html('Data: ' + '<strong>' + msg.forecast.forecastday[i].date + '</strong>' + ' Temperatura: ' + msg.forecast.forecastday[i].day.maxtemp_c + ' C, ' + 'Siła wiatru: ' + msg.forecast.forecastday[i].day.maxwind_kph +
                     ' km/h ' + ', Zachmurzenie: ' + msg.forecast.forecastday[0].day.condition.text + '</br>');
             }
